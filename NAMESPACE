@@ -1,4 +1,4 @@
-export("refIDtoIndex", "processPointMap", "processPointMapAndLinks")
+export("refIDtoIndex", "processPointMap", "processPointMapAndLinks", "matchPointsToLines")
 export("getShapeGraph", "getPointmapData", "getPointmapLinks", "getPointmapDataAndLinks")
 export("isovist", "makeIsovists", "stepdepth", "export", "convertMap", "cliHelp", "import", "importLines")
 export("VGA", "axialAnalysis", "segmentAnalysis", "linkMapCoords", "linkMapRefs", "agentAnalysis")
