@@ -16,8 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
-matchPointsToLines = function(points, lines, getIndex = F) {
-  d = gDistance(lines, points, byid = T)
+matchPointsToLines = function(points, lines, getIndex = FALSE) {
+  d = rgeos::gDistance(lines, points, byid = T)
   minidx = row.names(lines@data[apply(d, 1, which.min), ])
   if(getIndex) {
     return(match(row.names(lines@data), minidx))

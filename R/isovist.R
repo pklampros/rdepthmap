@@ -36,11 +36,11 @@ isovist = function(graphFileIn, graphFileOut = NA, x, y, angle = NA, viewangle =
 makeIsovists = function(graphFilePath, originX, originY, scale = 1,
                         cliPath = getDefaultCLILocation(), verbose = FALSE) {
   tmpGraph = tempfile()
-  rdephtmap::isovist(graphFilePath, tmpGraph, originX, originY)
-  rdephtmap::convertMap(tmpGraph, tmpGraph, "convex")
+  rdepthmap::isovist(graphFilePath, tmpGraph, originX, originY)
+  rdepthmap::convertMap(tmpGraph, tmpGraph, "convex")
 
   tmpMap = paste0(tempfile(), ".mif")
-  rdephtmap::export(tmpGraph, tmpMap, "shapegraph-map-mif")
+  rdepthmap::export(tmpGraph, tmpMap, "shapegraph-map-mif")
   isovists = readOGR(tmpMap, verbose = verbose)
 
   file.remove(tmpGraph);
