@@ -28,7 +28,7 @@ createGrid = function(graphFileIn, graphFileOut = NA, gridSize,
 fillGrid = function(graphFileIn, graphFileOut = NA, fillX, fillY,
                     cliPath = getDefaultCLILocation(), verbose = FALSE) {
   if (is.na(graphFileOut)) graphFileOut = graphFileIn;
-  tmpPtz = paste0(tempfile(), ".tsv");
+  tmpPtz = tempfile(fileext = ".tsv");
   dt = data.frame(x = fillX, y = fillY)
   write.table(dt, tmpPtz, row.names = F, quote = F, sep = "\t")
 

@@ -24,7 +24,7 @@ linkMapCoords = function(graphFileIn, graphFileOut = NA, linkFromX, linkFromY,
     stop(paste0("Unknown map type: ", mapTypeToLink))
   }
 
-  tmpPtz = paste0(tempfile(), ".tsv");
+  tmpPtz = tempfile(fileext = ".tsv");
   dt = data.frame(x1 = linkFromX, y1 = linkFromY, x2 = linkToX, y2 = linkToY)
   write.table(dt, tmpPtz, row.names = F, quote = F, sep = "\t")
 
@@ -50,9 +50,9 @@ linkMapRefs = function(graphFileIn, graphFileOut = NA, linkFrom, linkTo,
     stop(paste0("Unknown map type: ", mapTypeToLink))
   }
 
-  tmpPtz = paste0(tempfile(), ".csv");
+  tmpPtz = tempfile(fileext = ".tsv");
   dt = data.frame(reffrom = linkFrom, refto = linkTo)
-  write.table(dt, tmpPtz, row.names = F, quote = F, sep = ",")
+  write.table(dt, tmpPtz, row.names = F, quote = F, sep = "\t")
 
 
   params = c("-f", formatForCLI(graphFileIn),

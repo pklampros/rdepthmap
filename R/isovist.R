@@ -18,7 +18,7 @@
 isovist = function(graphFileIn, graphFileOut = NA, x, y, angle = NA, viewangle = NA,
                    cliPath = getDefaultCLILocation(), verbose = FALSE) {
   if (is.na(graphFileOut)) graphFileOut = graphFileIn;
-  tmpPtz = paste0(tempfile(), ".csv");
+  tmpPtz = tempfile(fileext = ".csv")
   dt = data.frame(x = x, y = y)
   if (!is.na(angle)) {
     dt$angle = angle;
@@ -35,11 +35,11 @@ isovist = function(graphFileIn, graphFileOut = NA, x, y, angle = NA, viewangle =
 
 makeIsovists = function(graphFilePath, originX, originY, scale = 1,
                         cliPath = getDefaultCLILocation(), verbose = FALSE) {
-  tmpGraph = tempfile()
+  tmpGraph = tempfile(fileext = ".graph");
   rdepthmap::isovist(graphFilePath, tmpGraph, originX, originY)
   rdepthmap::convertMap(tmpGraph, tmpGraph, "convex")
 
-  tmpMap = paste0(tempfile(), ".mif")
+  tmpMap = tempfile(fileext = ".mif")
   rdepthmap::export(tmpGraph, tmpMap, "shapegraph-map-mif")
   isovists = readOGR(tmpMap, verbose = verbose)
 

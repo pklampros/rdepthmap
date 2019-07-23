@@ -26,7 +26,7 @@ export = function(graphFileIn, fileOut, exportType,
 
 getPointmapData = function(graphFileIn, scale = 1,
                            cliPath = getDefaultCLILocation(), verbose = FALSE) {
-  mapFile = tempfile()
+  mapFile = tempfile(fileext = ".csv");
   rdepthmap::export(graphFileIn, mapFile, "pointmap-data-csv", cliPath, verbose)
   dpm = processPointMap(mapFile, scale, ",")
   file.remove(mapFile)
@@ -35,7 +35,7 @@ getPointmapData = function(graphFileIn, scale = 1,
 
 getPointmapLinks = function(graphFileIn,
                             cliPath = getDefaultCLILocation(), verbose = FALSE) {
-  csvFile = tempfile()
+  csvFile = tempfile(fileext = ".csv");
   rdepthmap::export(graphFileIn, csvFile, "pointmap-links-csv", cliPath, verbose)
   links = read.csv(csvFile)
   file.remove(csvFile)
@@ -45,9 +45,9 @@ getPointmapLinks = function(graphFileIn,
 
 getPointmapDataAndLinks = function(graphFileIn, scale = 1,
                                    cliPath = getDefaultCLILocation(), verbose = FALSE) {
-  mapFile = tempfile()
+  mapFile = tempfile(fileext = ".csv");
   rdepthmap::export(graphFileIn, mapFile, "pointmap-data-csv")
-  linkFile = tempfile()
+  linkFile = tempfile(fileext = ".csv");
   rdepthmap::export(graphFileIn, linkFile, "pointmap-links-csv")
   dpm = processPointMapAndLinks(mapFile, linkFile, scale, ",")
   file.remove(mapFile)

@@ -16,7 +16,7 @@
 # along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
 makeTempPointFile = function(pointsX, pointsY, sep = "\t") {
-  tmpPtz = paste0(tempfile(), ".csv");
+  tmpPtz = tempfile(fileext = ".csv");
   dt = data.frame(x = pointsX, y = pointsY)
   write.table(dt, tmpPtz, row.names = F, quote = F, sep = sep)
   tmpPtz

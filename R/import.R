@@ -47,7 +47,7 @@ importLines = function(linesIn, graphFileOut,
   if (class(linesIn)[1] == "SpatialLinesDataFrame") {
     linesDF = cbind(linesDF, linesIn@data)
   }
-  tmpGraph = tempfile()
+  tmpGraph = tempfile(fileext = ".tsv");
   write.table(linesDF, tmpGraph, row.names = F, quote = F, sep = "\t")
 
   rdepthmap::import(tmpGraph, graphFileOut)
