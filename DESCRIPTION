@@ -1,9 +1,14 @@
 Package: rdepthmap
 Type: Package
 Title: R and depthmapX CLI interface
+Date: 2019-07-08
 Version: 0.1.0
-Author: Petros Koutsolampros
-Maintainer: Petros Koutsolampros <petros.koutsolampros.11@ucl.ac.uk>
+Authors@R: c(
+    person("Petros", "Koutsolampros", email = "petros.koutsolampros.11@ucl.ac.uk", role = c("cre", "aut")),
+    person("Fani", "Kostourou", role = "ctb"),
+    person("Kimon", "Krenz", role = "ctb"),
+    person("University College London", role = "fnd"),
+    person("Spacelab", role = "fnd"))
 Description: This package interfaces with the depthmapX CLI with the aim of modifying .graph files.
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
