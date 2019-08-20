@@ -5,7 +5,7 @@ Date: 2019-07-08
 Version: 0.1.0
 Authors@R: c(
     person("Petros", "Koutsolampros", email = "petros.koutsolampros.11@ucl.ac.uk", role = c("cre", "aut")),
-    person("Fani", "Kostourou", role = "ctb"),
+    person("Fani", "Kostourou", role = c("aut", "ctb")),
     person("Kimon", "Krenz", role = "ctb"),
     person("University College London", role = "fnd"),
     person("Spacelab", role = "fnd"))
