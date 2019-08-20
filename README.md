@@ -8,3 +8,4 @@ library(devtools)
 install_github("orange-vertex/rdepthmap")
 library(rdepthmap)
 ```
+Windows users might need to also install [Rtools](https://cran.r-project.org/bin/windows/Rtools/)
