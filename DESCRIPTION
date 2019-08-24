@@ -14,6 +14,6 @@ License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    sp, rgeos, rgdal, maptools
+    sp, rgeos, rgdal, maptools, igraph
 Suggests: 
     testthat

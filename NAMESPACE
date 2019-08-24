@@ -1,4 +1,5 @@
 # Copyright 2019 Petros Koutsolampros
+# Copyright 2019 Fani Kostourou
 #
 # This file is part of rdepthmap
 #
@@ -26,7 +27,9 @@ export("makePurpleOrangeColour", "depthmap.purpleorange.colour")
 export("makeBlueRedColour", "depthmap.bluered.colour")
 export("makeGreyScaleColour", "depthmap.grayscale.colour")
 export("makeNiceHSBColour", "depthmap.nicehsb.colour")
+export("shapegraphToIGraph", "getShapeGraphConnections", "getShapeGraphLinksUnlinks")
 
 import("sp", "rgdal", "maptools")
-importFrom("utils", "read.csv", "write.table", "tail")
-importFrom("rgeos", "gDistance")
+importFrom("utils", "read.csv", "write.table", "tail","read.table")
+importFrom("rgeos", "gDistance", "gCentroid")
+importFrom("igraph", "graph.data.frame", "E", "E<-")
