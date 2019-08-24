@@ -16,40 +16,33 @@
 % You should have received a copy of the GNU General Public License
 % along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
-\name{import}
-\alias{import}
-\alias{importLines}
+\name{shapegraphToIGraph}
+\alias{shapegraphToIGraph}
+%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Import data into a graph file
+Conversion of shapegraph to igraph
 }
 \description{
-Import data into a graph file. importLines specifically imports SpatialLines or SpatialLinesDataFrame objects.
+Creates igraph based on the connections and the x,y coordinates of the centroids of shapes in a shapegraph (axial,segment, convex). Specify weightcolumn to assign weight to graph edges.
 }
 \usage{
-import(filesToImport, graphFileOut, cliPath = getDefaultCLILocation(), verbose = FALSE)
-importLines(linesIn, graphFileOut, cliPath = getDefaultCLILocation(), verbose = FALSE)
+shapegraphToIGraph(graphFile, weightcolumn = NA)
 }
 \arguments{
-  \item{filesToImport}{
-    A file to import. Currently CSV, TSV and DXF files are accepted
+  \item{graphFile}{
+    The input graph file.
   }
-  \item{linesIn}{
-    A SpatialLines or SpatialLinesDataFrame object.
+  \item{weightcolumn}{
+    Optional.The variable used to assign weight to graph edges
   }
-  \item{graphFileOut}{
-    The output graph file.
-  }
-  \item{cliPath}{
-    Optional. Provide the path to a different CLI.
-  }
-  \item{verbose}{
-    Optional. Show more information of the process.
-  }
+}
+\details{
+If weightcolumn is provided, edge connections weight is calculated by taking the average of the variable of the connected nodes.
 }
 \value{
-No value returned, process is between files.
+  Returns graph.data.frame.
 }
 \author{
-Petros Koutsolampros
 Fani Kostourou
+Petros Koutsolampros
 }

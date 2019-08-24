@@ -86,3 +86,21 @@ getShapeGraph = function(graphFileIn,
   file.remove(mapFile)
   return(ogr);
 }
+
+getShapeGraphConnections = function(graphFileIn,
+                         cliPath = getDefaultCLILocation(), verbose = FALSE) {
+  connectionsFile = tempfile(fileext = ".csv")
+  rdepthmap::export(graphFileIn, connectionsFile, "shapegraph-connections-csv", cliPath, verbose)
+  csv = read.table(connectionsFile,header = TRUE, sep = ",")
+  file.remove(connectionsFile)
+  return(csv);
+}
+
+getShapeGraphLinksUnlinks = function(graphFileIn,
+                                    cliPath = getDefaultCLILocation(), verbose = FALSE) {
+  linksunlinksFile = tempfile(fileext = ".csv")
+  rdepthmap::export(graphFileIn, linksunlinksFile, "shapegraph-links-unlinks-csv", cliPath, verbose)
+  csv = read.table(linksunlinksFile,header = TRUE, sep = ",")
+  file.remove(linksunlinksFile)
+  return(csv);
+}
