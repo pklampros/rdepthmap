@@ -24,7 +24,7 @@ shapegraphToIGraph = function(graphFile, weightcolumn = NA){
   unlinks = linksunlinks[linksunlinks$link == 0,]
   unlinks = unlinks[,c("refA","refB")]
   connections = rdepthmap::getShapeGraphConnections(graphFile)
-  if (nrow(connections) ==0 ) {
+  if (nrow(connections) == 0) {
     edges = links
   } else {
     edges = connections
