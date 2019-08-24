@@ -23,6 +23,7 @@
 \alias{getPointmapDataAndLinks}
 \alias{getShapeGraph}
 \alias{getShapeGraphConnections}
+\alias{getShapeGraphLinksUnlinks}
 \title{
 Export data
 }
@@ -44,6 +45,8 @@ getShapeGraph(graphFileIn,
        cliPath = getDefaultCLILocation(), verbose = FALSE)
 getShapeGraphConnections(graphFileIn,
                          cliPath = getDefaultCLILocation(), verbose = FALSE)
+getShapeGraphLinksUnlinks(graphFileIn,
+                         cliPath = getDefaultCLILocation(), verbose = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -59,8 +62,9 @@ getShapeGraphConnections(graphFileIn,
     "pointmap-connections-csv",
     "pointmap-links-csv",
     "shapegraph-map-csv",
-    "shapegraph-map-mif" or
-    "shapegraph-connections-csv".
+    "shapegraph-map-mif",
+    "shapegraph-connections-csv" or
+    "shapegraph-links-unlinks-csv".
   }
   \item{scale}{
     Provided for when importing a pointmap directly. Will scale the whole map.
