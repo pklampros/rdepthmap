@@ -24,7 +24,11 @@ shapegraphToIGraph = function(graphFile, weightcolumn = NA){
   unlinks = linksunlinks[linksunlinks$link == 0,]
   unlinks = unlinks[,c("refA","refB")]
   connections = rdepthmap::getShapeGraphConnections(graphFile)
-  edges = rbind(links,connections[!(connections %in% unlinks),c("refA","refB")])
+  if (nrow(connections) ==0 ) {
+    edges = links
+  } else {
+    edges = connections
+  }
 
   for (i in 1:nrow(edges)){
     edges[i, ] = sort(edges[i,c("refA","refB")])
