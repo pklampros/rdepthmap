@@ -43,7 +43,8 @@ shapegraphToIGraph = function(graphFile, weightcolumn = NA){
   Depth_Ref = ogr@data$Depthmap_Ref
   ogr@data  = ogr@data[,c("Depthmap_Ref",names(ogr@data)[names(ogr@data) != "Depthmap_Ref"])]
   if (!is.na(weightcolumn)) {
-    edges$weight = ((ogr@data[match(refA, Depth_Ref), weightcolumn])+(ogr@data[match(refB, Depth_Ref), weightcolumn]))/2
+    edges$weight = ((ogr@data[match(refA, Depth_Ref), weightcolumn]) +
+                    (ogr@data[match(refB, Depth_Ref), weightcolumn]))/2
     graph = graph.data.frame(edges, directed = FALSE, vertices = ogr@data)
     E(graph)$weight = edges$weight
   } else {
