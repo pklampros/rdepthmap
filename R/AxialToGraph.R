@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
-axialtograph = function(graphFile){
+axialToGraph = function(graphFile){
   ax.ogr = rdepthmap::getShapeGraph(graphFile)
   ax.connections = rdepthmap::getShapeGraphConnections(graphFile)
   for (i in 1:nrow(ax.connections)){
