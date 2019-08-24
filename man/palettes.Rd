@@ -69,4 +69,5 @@ Returns a single colour or a vector of colours.
 }
 \author{
 Petros Koutsolampros
+Fani Kostourou
 }

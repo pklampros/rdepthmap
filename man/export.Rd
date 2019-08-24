@@ -22,6 +22,7 @@
 \alias{getPointmapLinks}
 \alias{getPointmapDataAndLinks}
 \alias{getShapeGraph}
+\alias{getShapeGraphConnections}
 \title{
 Export data
 }
@@ -41,6 +42,8 @@ getPointmapDataAndLinks(graphFileIn, scale = 1,
 
 getShapeGraph(graphFileIn,
        cliPath = getDefaultCLILocation(), verbose = FALSE)
+getShapeGraphConnections(graphFileIn,
+                         cliPath = getDefaultCLILocation(), verbose = FALSE))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -75,4 +78,5 @@ No value returned, process is between files.
 
 \author{
 Petros Koutsolampros
+Fani Kostourou
 }
