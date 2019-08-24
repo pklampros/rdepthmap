@@ -16,32 +16,33 @@
 % You should have received a copy of the GNU General Public License
 % along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
-\name{segmentToGraph}
-\alias{segmentToGraph}
+\name{shapegraphToIGraph}
+\alias{shapegraphToIGraph}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Segment Map to Weighted Graph conversion
+Conversion of shapegraph to igraph
 }
 \description{
-Creates igraph based on the connections and the x,y coordinates of the centroids of segment map. Assigns weight to the graph edges based on a variable.
+Creates igraph based on the connections and the x,y coordinates of the centroids of shapes in a shapegraph (axial,segment, convex). Specify weightcolumn to assign weight to graph edges.
 }
 \usage{
-segmentToGraph(graphFile, weightcolumn = "Segment Length")
+shapegraphToIGraph(graphFile, weightcolumn = NA)
 }
 \arguments{
   \item{graphFile}{
     The input graph file.
   }
   \item{weightcolumn}{
-    The variable used to assign weight to graph edges. Defaults to Segment Length.
+    Optional.The variable used to assign weight to graph edges
   }
 }
 \details{
-Edge connections weight is calculated by taking the average of the variable of the connected nodes.
+If weightcolumn is provided, edge connections weight is calculated by taking the average of the variable of the connected nodes.
 }
 \value{
   Returns graph.data.frame.
 }
 \author{
 Fani Kostourou
+Petros Koutsolampros
 }
