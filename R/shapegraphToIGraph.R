@@ -24,14 +24,13 @@ shapegraphToIGraph = function(graphFile, weightcolumn = NA){
   }
   connections = connections[!duplicated(connections),]
 
-  ogr@data$x.coords = as.data.frame(gCentroid(ogr, byid = T))[,1]
-  ogr@data$y.coords = as.data.frame(gCentroid(ogr, byid = T))[,2]
-  ogr$coords = as.matrix(ogr@data[,col])
+  ogr@data$x = as.data.frame(gCentroid(ogr, byid = T))[,1]
+  ogr@data$y = as.data.frame(gCentroid(ogr, byid = T))[,2]
 
   refA = connections$refA
   refB = connections$refB
-  Depth_Ref = ogr@data$Ref
-  ogr@data  = ogr@data[,c("Ref",names(ogr@data)[names(ogr@data) != "Ref"])]
+  Depth_Ref = ogr@data$Depthmap_Ref
+  ogr@data  = ogr@data[,c("Depthmap_Ref",names(ogr@data)[names(ogr@data) != "Depthmap_Ref"])]
   if (!is.na(weightcolumn)) {
     connections$weight = ((ogr@data[match(refA, Depth_Ref), weightcolumn])+(ogr@data[match(refB, Depth_Ref), weightcolumn]))/2
     graph = graph.data.frame(connections, directed = FALSE, vertices = ogr@data)
