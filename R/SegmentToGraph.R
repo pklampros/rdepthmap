@@ -16,29 +16,24 @@
 # You should have received a copy of the GNU General Public License
 # along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
+segmenttograph = function(graphFile, weightcolumn = "Segment Length"){
+  segm.ogr = rdepthmap::getShapeGraph(graphFile)
+  segm.connections = rdepthmap::getShapeGraphConnections(graphFile)
+  for (i in 1:nrow(segm.connections)){
+    segm.connections[i, ] = sort(segm.connections[i,c("refA","refB")])
+  }
+  segm.connections = segm.connections[!duplicated(segm.connections),]
 
-segm.df = read.table(graphFileOut, header = TRUE, sep = ",", check.names = FALSE)
-segm.ogr = SpatialLinesDataFrame(SpatialLines(lapply(1:nrow(segm.df), FUN=function(i) {
-  Lines(Line(matrix(c(segm.df[i,'x1'], segm.df[i,'x2'], segm.df[i,'y1'], segm.df[i,'y2']),ncol=2)), ID=i)})),
-  data = data.frame(segm.df[,!(names(segm.df) %in% c('x1', 'x2', 'y1', 'y2'))], row.names = 1:nrow(segm.df), check.names = FALSE))
-segm.ogr@proj4string@projargs = linesIn@proj4string@projargs
+  segm.ogr@data$x.coords = as.data.frame(gCentroid(segm.ogr, byid = T))[,1]
+  segm.ogr@data$y.coords = as.data.frame(gCentroid(segm.ogr, byid = T))[,2]
+  segm.ogr$segm.coords = as.matrix(segm.ogr@data[,col])
 
+  refA = segm.connections$refA
+  refB = segm.connections$refB
+  Depth_Ref = segm.ogr@data$Ref
+  segm.connections$weight = ((segm.ogr@data[match(refA, Depth_Ref), weightcolumn])+(segm.ogr@data[match(refB, Depth_Ref), weightcolumn]))/2
 
-segm.connections = read.table(graphFileOut,header = TRUE, sep = ",")
-for (i in 1:nrow(segm.connections)){
-  segm.connections[i, ] = sort(segm.connections[i,c("refA","refB")])
+  segm.graph = graph.data.frame(segm.connections, directed = FALSE, vertices = segm.ogr@data$Ref)
+  E(segm.graph)$weight = segm.connections$weight
+  return(segm.graph);
 }
-segm.connections = segm.connections[!duplicated(segm.connections),]
-
-
-segm.ogr@data$x.coords = as.data.frame(gCentroid(Csegm.ogr, byid = T))[,1]
-segm.ogr@data$y.coords = as.data.frame(gCentroid(segm.ogr, byid = T))[,2]
-segm.ogr$segm.coords = as.matrix(segm.ogr@data[,col])
-
-refA = segm.connections$refA
-refB = segm.connections$refB
-Depth_Ref = segm.ogr@data$Ref
-segm.connections$weight = ((segm.ogr@data[match(refA, Depth_Ref), "Segment Length"])+(segm.ogr@data[match(refB, Depth_Ref), "Segment Length"]))/2
-
-segm.graph = graph.data.frame(segm.connections, directed = FALSE, vertices = segm.ogr@data$Ref)
-E(segm.graph)$weight = segm.connections$weight

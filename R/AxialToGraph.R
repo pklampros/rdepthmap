@@ -16,23 +16,22 @@
 # You should have received a copy of the GNU General Public License
 # along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
+axialtograph = function(graphFile){
+  ax.ogr = rdepthmap::getShapeGraph(graphFile)
+  ax.connections = rdepthmap::getShapeGraphConnections(graphFile)
+  for (i in 1:nrow(ax.connections)){
+    ax.connections[i, ] = sort(ax.connections[i,c("refA","refB")])
+  }
+  ax.connections = ax.connections[!duplicated(ax.connections),]
 
-ax.ogr = readOGR(mapFile)
-ax.ogr@proj4string@projargs = linesIn@proj4string@projargs
+  ax.ogr@data$x.coords = as.data.frame(gCentroid(ax.ogr, byid = T))[,1]
+  ax.ogr@data$y.coords = as.data.frame(gCentroid(ax.ogr, byid = T))[,2]
+  col = c("x.coords","y.coords")
+  ax.ogr$ax.coords = as.matrix(ax.ogr@data[,col])
 
-ax.connections = read.table(graphFileOut,header = TRUE, sep = ",")
-for (i in 1:nrow(ax.connections)){
-  ax.connections[i, ] = sort(ax.connections[i,c("refA","refB")])
+  ax.graph = graph.data.frame(ax.connections, directed = FALSE, vertices = ax.ogr@data$Depthmap_Ref)
+  return(ax.graph);
 }
-ax.connections = ax.connections[!duplicated(ax.connections),]
-
-ax.ogr@data$x.coords = as.data.frame(gCentroid(ax.ogr, byid = T))[,1]
-ax.ogr@data$y.coords = as.data.frame(gCentroid(ax.ogr, byid = T))[,2]
-col = c("x.coords","y.coords")
-ax.ogr$ax.coords = as.matrix(ax.ogr@data[,col])
-
-ax.graph = graph.data.frame(ax.connections, directed = FALSE, vertices = ax.ogr@data$Depthmap_Ref)
-
 
 
 
