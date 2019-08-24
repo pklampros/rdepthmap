@@ -18,25 +18,32 @@
 
 shapegraphToIGraph = function(graphFile, weightcolumn = NA){
   ogr = rdepthmap::getShapeGraph(graphFile)
+  linksunlinks = rdepthmap::getShapeGraphLinksUnlinks(graphFile)
+  links = linksunlinks[linksunlinks$link == 1,]
+  links = links[,c("refA","refB")]
+  unlinks = linksunlinks[linksunlinks$link == 0,]
+  unlinks = unlinks[,c("refA","refB")]
   connections = rdepthmap::getShapeGraphConnections(graphFile)
-  for (i in 1:nrow(connections)){
-    connections[i, ] = sort(connections[i,c("refA","refB")])
+  edges = rbind(links,connections[!(connections %in% unlinks),c("refA","refB")])
+
+  for (i in 1:nrow(edges)){
+    edges[i, ] = sort(edges[i,c("refA","refB")])
   }
-  connections = connections[!duplicated(connections),]
+  edges = edges[!duplicated(edges),]
 
   ogr@data$x = as.data.frame(gCentroid(ogr, byid = T))[,1]
   ogr@data$y = as.data.frame(gCentroid(ogr, byid = T))[,2]
 
-  refA = connections$refA
-  refB = connections$refB
+  refA = edges$refA
+  refB = edges$refB
   Depth_Ref = ogr@data$Depthmap_Ref
   ogr@data  = ogr@data[,c("Depthmap_Ref",names(ogr@data)[names(ogr@data) != "Depthmap_Ref"])]
   if (!is.na(weightcolumn)) {
-    connections$weight = ((ogr@data[match(refA, Depth_Ref), weightcolumn])+(ogr@data[match(refB, Depth_Ref), weightcolumn]))/2
-    graph = graph.data.frame(connections, directed = FALSE, vertices = ogr@data)
-    E(graph)$weight = connections$weight
+    edges$weight = ((ogr@data[match(refA, Depth_Ref), weightcolumn])+(ogr@data[match(refB, Depth_Ref), weightcolumn]))/2
+    graph = graph.data.frame(edges, directed = FALSE, vertices = ogr@data)
+    E(graph)$weight = edges$weight
   } else {
-    graph = graph.data.frame(connections, directed = FALSE, vertices = ogr@data)
+    graph = graph.data.frame(edges, directed = FALSE, vertices = ogr@data)
   }
   return(graph);
 }
