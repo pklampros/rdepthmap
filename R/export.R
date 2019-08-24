@@ -95,3 +95,12 @@ getShapeGraphConnections = function(graphFileIn,
   file.remove(connectionsFile)
   return(csv);
 }
+
+getShapeGraphLinksUnlinks = function(graphFileIn,
+                                    cliPath = getDefaultCLILocation(), verbose = FALSE) {
+  linksunlinksFile = tempfile(fileext = ".csv")
+  rdepthmap::export(graphFileIn, linksunlinksFile, "shapegraph-links-unlinks-csv", cliPath, verbose)
+  csv = read.table(linksunlinksFile,header = TRUE, sep = ",")
+  file.remove(linksunlinksFile)
+  return(csv);
+}
