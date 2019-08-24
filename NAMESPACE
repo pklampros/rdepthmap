@@ -30,5 +30,6 @@ export("makeNiceHSBColour", "depthmap.nicehsb.colour")
 export("axialToGraph", "segmentToGraph", "getShapeGraphConnections")
 
 import("sp", "rgdal", "maptools")
-importFrom("utils", "read.csv", "write.table", "tail")
-importFrom("rgeos", "gDistance")
+importFrom("utils", "read.csv", "write.table", "tail","read.table")
+importFrom("rgeos", "gDistance", "gCentroid")
+importFrom("igraph", "graph.data.frame", "E", "E<-")
