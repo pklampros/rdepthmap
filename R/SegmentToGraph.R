@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
-segmenttograph = function(graphFile, weightcolumn = "Segment Length"){
+segmentToGraph = function(graphFile, weightcolumn = "Segment Length"){
   segm.ogr = rdepthmap::getShapeGraph(graphFile)
   segm.connections = rdepthmap::getShapeGraphConnections(graphFile)
   for (i in 1:nrow(segm.connections)){
