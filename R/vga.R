@@ -15,28 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
-prepVGA = function(graphFileIn, graphFileOut = NA, fillX, fillY, gridSize = NA, maxVisibility = NA,
-                   makeBoundaryGraph = FALSE, makeGraph = FALSE, unmakeGraph = FALSE,
-                   removeLinksOnUnmake = FALSE,
-                   cliPath = getDefaultCLILocation(), verbose = FALSE) {
-  if (is.na(graphFileOut)) graphFileOut = graphFileIn;
-  tmpPtz = makeTempPointFile(fillX, fillY);
-
-  params = c("-f", formatForCLI(graphFileIn),
-             "-o", formatForCLI(graphFileOut),
-             "-m", "VISPREP",
-             "-pf", formatForCLI(tmpPtz));
-  if (!is.na(gridSize)) params = c(params, "-pr", gridSize);
-  if (!is.na(maxVisibility)) params = c(params, "-pg", maxVisibility);
-  if (makeBoundaryGraph) params = c(params, "-pb");
-  if (makeGraph) params = c(params, "-pm");
-  if (unmakeGraph) params = c(params, "-pu");
-  if (removeLinksOnUnmake) params = c(params, "-pl");
-
-  depthmapXcli(params, cliPath, verbose);
-  invisible(file.remove(tmpPtz));
-}
-
 VGA = function(graphFileIn, graphFileOut = NA, vgaMode, radii,
                cliPath = getDefaultCLILocation(), verbose = FALSE) {
   if (is.na(graphFileOut)) graphFileOut = graphFileIn;
