@@ -16,11 +16,13 @@
 # along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
 getDefaultCLILocation = function() {
-  depthmapXcli = system.file("exec", "depthmapXcli_macos", package = "rdepthmap")
-  if (.Platform$OS.type == "windows") {
-    depthmapXcli = system.file("exec", "depthmapXcli_win64.exe", package = "rdepthmap")
-  }
-  depthmapXcli
+  depthmapXcli = NA
+  switch(Sys.info()[['sysname']],
+         Windows= {depthmapXcli = "depthmapXcli_win64.exe"},
+         Linux  = {depthmapXcli = "depthmapXcli_linux64"},
+         Darwin = {depthmapXcli = "depthmapXcli_macos"})
+  if(is.na(depthmapXcli)) {stop("Unknown operating system")}
+  system.file("exec", depthmapXcli, package = "rdepthmap")
 }
 
 depthmapXcli = function(params, cliPath = getDefaultCLILocation(), verbose = FALSE) {
