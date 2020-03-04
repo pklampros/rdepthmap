@@ -44,10 +44,10 @@ isovist(graphFileIn, graphFileOut, x, y, angle = NA, viewangle = NA,
     The y-value of isovist origin point.
   }
   \item{angle}{
-    The angle defining the view orientation of the isovist (in partial isovists).
+    The angle defining the view orientation of the isovist (in degrees, for partial isovists).
   }
   \item{viewangle}{
-    The angle defining the view range of the isovist (in partial isovists).
+    The angle defining the view range of the isovist (in degrees, for partial isovists).
   }
   \item{cliPath}{
     Optional. Provide the path to a different CLI.
