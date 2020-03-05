@@ -18,7 +18,7 @@
 
 export("refIDtoIndex", "processPointMap", "processPointMapAndLinks", "matchPointsToLines", "getTopFeatures")
 export("getShapeGraph", "getPointmapData", "getPointmapLinks", "getPointmapDataAndLinks")
-export("isovist", "makeIsovists", "stepdepth", "export", "convertMap", "cliHelp", "import", "importLines")
+export("isovist", "isovist2pts", "makeIsovists", "stepdepth", "export", "convertMap", "cliHelp", "import", "importLines")
 export("VGA", "axialAnalysis", "segmentAnalysis", "linkMapCoords", "linkMapRefs", "agentAnalysis")
 export("createGrid", "fillGrid", "makeVGAGraph", "unmakeVGAGraph")
 export("makeDepthmapClassicColour", "depthmap.classic.colour")

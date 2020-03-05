@@ -17,16 +17,20 @@
 
 \name{isovist}
 \alias{isovist}
+\alias{isovist2pts}
 \alias{makeIsovists}
 \title{
 Isovist
 }
 \description{
 Creates an isovist at a specific point.
+To create an isovist with two points (one the origin, the other the direction) use isovist2pts.
 makeIsovists is a helper function that creates and imports multiple Isovists
 }
 \usage{
 isovist(graphFileIn, graphFileOut, x, y, angle = NA, viewangle = NA,
+        cliPath = getDefaultCLILocation(), verbose = FALSE)
+isovist2pts(graphFileIn, graphFileOut, x, y, toX, toY, viewangle,
         cliPath = getDefaultCLILocation(), verbose = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -45,6 +49,12 @@ isovist(graphFileIn, graphFileOut, x, y, angle = NA, viewangle = NA,
   }
   \item{angle}{
     The angle defining the view orientation of the isovist (in degrees, for partial isovists).
+  }
+  \item{toX}{
+    The x-value of a second point showing the direction of a targeted isovist.
+  }
+  \item{toY}{
+    The y-value of a second point showing the direction of a targeted isovist.
   }
   \item{viewangle}{
     The angle defining the view range of the isovist (in degrees, for partial isovists).

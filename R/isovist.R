@@ -20,7 +20,11 @@ isovist = function(graphFileIn, graphFileOut = NA, x, y, angle = NA, viewangle =
   if (is.na(graphFileOut)) graphFileOut = graphFileIn;
   tmpPtz = tempfile(fileext = ".csv")
   dt = data.frame(x = x, y = y)
-  if (!is.na(angle)) {
+  targetedIsovist = F
+  suppressWarnings({
+    targetedIsovist = !is.na(angle)
+  })
+  if (targetedIsovist) {
     dt$angle = angle;
     dt$viewangle = viewangle;
   }
@@ -31,6 +35,13 @@ isovist = function(graphFileIn, graphFileOut = NA, x, y, angle = NA, viewangle =
                  "-m", "ISOVIST",
                  "-if", formatForCLI(tmpPtz)), cliPath, verbose);
   invisible(file.remove(tmpPtz));
+}
+
+isovist2pts = function(graphFileIn, graphFileOut = NA, x, y, toX, toY, viewangle,
+                       cliPath = getDefaultCLILocation(), verbose = FALSE) {
+  angles = 180 * atan2(toY - y, toX - x) / pi
+  angles = ifelse(angles < 0, 360 + angles, angles)
+  isovist(graphFileIn, graphFileOut, x, y, angles, viewangle, cliPath, verbose);
 }
 
 makeIsovists = function(graphFilePath, originX, originY, scale = 1,
