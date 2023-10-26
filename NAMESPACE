@@ -29,7 +29,6 @@ export("makeGreyScaleColour", "depthmap.grayscale.colour")
 export("makeNiceHSBColour", "depthmap.nicehsb.colour")
 export("shapegraphToIGraph", "getShapeGraphConnections", "getShapeGraphLinksUnlinks")
 
-import("sp", "rgdal", "maptools")
+import("sp", "sf")
 importFrom("utils", "read.csv", "write.table", "tail","read.table")
-importFrom("rgeos", "gDistance", "gCentroid")
 importFrom("igraph", "graph.data.frame", "E", "E<-")

@@ -1,8 +1,8 @@
 Package: rdepthmap
 Type: Package
 Title: R and depthmapX CLI interface
-Date: 2019-07-08
-Version: 0.1.0
+Date: 2023-10-25
+Version: 0.2.0
 Authors@R: c(
     person("Petros", "Koutsolampros", email = "petros.koutsolampros.11@ucl.ac.uk", role = c("cre", "aut")),
     person("Fani", "Kostourou", role = c("aut", "ctb")),
@@ -14,6 +14,6 @@ License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    sp, rgeos, rgdal, maptools, igraph
+    sp, sf, igraph
 Suggests: 
     testthat

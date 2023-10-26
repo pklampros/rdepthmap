@@ -82,7 +82,7 @@ getShapeGraph = function(graphFileIn,
                          cliPath = getDefaultCLILocation(), verbose = FALSE) {
   mapFile = tempfile(fileext = ".mif")
   rdepthmap::export(graphFileIn, mapFile, "shapegraph-map-mif", cliPath, verbose)
-  ogr = readOGR(mapFile, verbose = verbose)
+  ogr = sf::st_read(mapFile, geometry_column = 1L, quiet = !verbose)
   file.remove(mapFile)
   return(ogr);
 }

@@ -18,6 +18,6 @@
 
 getTopFeatures = function(spatialDataFrame, column, percent) {
   numberOfFeatures = nrow(spatialDataFrame)
-  orderedFeatureIDs = order(spatialDataFrame@data[, column])
+  orderedFeatureIDs = order(spatialDataFrame[[column]])
   spatialDataFrame[tail(orderedFeatureIDs, percent*numberOfFeatures),]
 }

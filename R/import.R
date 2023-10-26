@@ -29,24 +29,20 @@ import = function(filesToImport, graphFileOut,
 
 importLines = function(linesIn, graphFileOut,
                        cliPath = getDefaultCLILocation(), verbose = FALSE) {
-  if (class(linesIn)[1] == "SpatialLinesDataFrame") {
-    lineData = linesIn@lines;
-  } else if (class(linesIn)[1] == "SpatialLines") {
-    lineData = linesIn;
-  } else {
-    stop(paste0("Lines in can only be of type SpatialLines or SpatialLinesDataFrame, not: ",
+  if (class(linesIn)[1] != "sf") {
+    stop(paste0("Lines in can only be of type sf, not: ",
                 class(linesIn)[1]))
   }
-  linesDF = do.call("rbind", lapply(lineData, FUN = function(lines) {
-    coords = lines@Lines[[1]]@coords
-    return(data.frame(x1 = coords[1,1],
-                      y1 = coords[1,2],
-                      x2 = coords[2,1],
-                      y2 = coords[2,2]))
-  }));
-  if (class(linesIn)[1] == "SpatialLinesDataFrame") {
-    linesDF = cbind(linesDF, linesIn@data)
-  }
+
+  startCoords = st_coordinates(st_line_sample(linesIn, sample=c(0)))
+  endCoords = st_coordinates(st_line_sample(linesIn, sample=c(1)))
+
+  linesDF = st_drop_geometry(linesIn)
+  linesDF['x1'] = startCoords[,'X']
+  linesDF['y1'] = startCoords[,'Y']
+  linesDF['x2'] = endCoords[,'X']
+  linesDF['y2'] = endCoords[,'Y']
+
   tmpGraph = tempfile(fileext = ".tsv");
   write.table(linesDF, tmpGraph, row.names = F, quote = F, sep = "\t")
 

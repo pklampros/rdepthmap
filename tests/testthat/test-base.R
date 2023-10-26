@@ -16,7 +16,7 @@
 # along with rdepthmap  If not, see <https://www.gnu.org/licenses/>.
 
 context("Base tests")
-library(sp)
+library(sf)
 
 test_that("proper formatForCLI output", {
   expect_equal(formatForCLI("A map"), "\"A map\"")

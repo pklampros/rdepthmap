@@ -35,19 +35,19 @@ shapegraphToIGraph = function(graphFile, weightcolumn = NA){
   }
   edges = edges[!duplicated(edges),]
 
-  ogr@data$x = as.data.frame(gCentroid(ogr, byid = T))[,1]
-  ogr@data$y = as.data.frame(gCentroid(ogr, byid = T))[,2]
+  ogr$x = as.data.frame(sf::st_centroid(ogr))[,1]
+  ogr$y = as.data.frame(sf::st_centroid(ogr))[,2]
 
   refA = edges$refA
   refB = edges$refB
-  Depth_Ref = ogr@data$Depthmap_Ref
-  ogr@data  = ogr@data[,c("Depthmap_Ref",names(ogr@data)[names(ogr@data) != "Depthmap_Ref"])]
+  Depth_Ref = ogr$Depthmap_Ref
+  ogr = ogr[,c("Depthmap_Ref",names(ogr)[names(ogr) != "Depthmap_Ref"])]
   if (!is.na(weightcolumn)) {
-    edges$weight = ((ogr@data[match(refA, Depth_Ref), weightcolumn])+(ogr@data[match(refB, Depth_Ref), weightcolumn]))/2
-    graph = graph.data.frame(edges, directed = FALSE, vertices = ogr@data)
+    edges$weight = ((ogr[[match(refA, Depth_Ref), weightcolumn]])+(ogr[[match(refB, Depth_Ref), weightcolumn]]))/2
+    graph = graph.data.frame(edges, directed = FALSE, vertices = st_drop_geometry(ogr))
     E(graph)$weight = edges$weight
   } else {
-    graph = graph.data.frame(edges, directed = FALSE, vertices = ogr@data)
+    graph = graph.data.frame(edges, directed = FALSE, vertices = st_drop_geometry(ogr))
   }
   return(graph);
 }

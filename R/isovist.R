@@ -52,7 +52,7 @@ makeIsovists = function(graphFilePath, originX, originY, scale = 1,
 
   tmpMap = tempfile(fileext = ".mif")
   rdepthmap::export(tmpGraph, tmpMap, "shapegraph-map-mif")
-  isovists = readOGR(tmpMap, verbose = verbose)
+  isovists = sf::st_read(tmpMap, geometry_column = 1L, quiet = !verbose)
 
   file.remove(tmpGraph);
   file.remove(tmpMap);
