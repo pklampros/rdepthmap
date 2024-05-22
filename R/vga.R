@@ -33,7 +33,7 @@ VGA = function(graphFileIn, graphFileOut = NA, vgaMode, radii,
     params = c(params, "-vg")
   } else if (vgaMode == "visibility-local") {
     params = c(params, "-vm", "visibility");
-    params = c(params, "-local")
+    params = c(params, "-vl")
   }
   depthmapXcli(params, cliPath, verbose);
 }
