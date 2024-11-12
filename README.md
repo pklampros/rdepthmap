@@ -1,3 +1,6 @@
+# Notice:
+This package has been replaced by https://github.com/spatialnous/alcyon which uses depthmapX's sala library directly instead of through the CLI.
+
 ## rdepthmap
 An R package to interface with the depthmapXcli
 
